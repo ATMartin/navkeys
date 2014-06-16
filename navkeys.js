@@ -5,7 +5,7 @@
  * Last update.......6/13/2014
  *
  */
-
+var navkeys = (function() {
 
 /* Keys Structure
  *
@@ -22,22 +22,33 @@ var keys = {
 	40: ['ARROW_DOWN', '#nk_down', '']
 };
 
-var alertMe = function (k) {
+var _navkeys = function() {
+	document.addEventListener('keydown', function(k) {
+		if (keys[k.keyCode]) { pubNav[ keys[k.keyCode][2] ](k); }
+	}, false);
+};
+
+var pubNav = {};
+
+pubNav.go = function () { _navkeys(); }
+
+pubNav.alertMe = function (k) {
 	alert('Key #' + k.keyCode + ' was pressed!');
 }
 
-var consoleLog = function (k) {
+pubNav.consoleLog = function (k) {
 	var keyname = keys[k.keyCode][0];
 	console.log(keyname);
 }
 
-var navThere = function (k) {
+pubNav.navThere = function (k) {
 	var selector = keys[k.keyCode][1];
 	var destination = document.querySelector(selector).querySelector('a').getAttribute('href');
 	window.location = destination
 }
 
-document.addEventListener('keydown', function (k) {
-	if (keys[k.keyCode]) { window[ keys[k.keyCode][2] ](k); }
-}, false);
+return pubNav;
 
+})();
+
+navkeys.go();
