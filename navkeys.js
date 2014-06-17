@@ -24,7 +24,10 @@ var keys = {
 
 var _navkeys = function() {
 	document.addEventListener('keydown', function(k) {
-		if (keys[k.keyCode]) { pubNav[ keys[k.keyCode][2] ](k); }
+		var keyObject = keys[k.keyCode];
+		//There has to be a better way than try-catch, but "typeof pubNav.keyObject[2] == 'function'" breaks everything! :(
+		try  { pubNav[ keyObject[2] ](k, keyObject); }
+		catch (e) { console.log('NAVKEYS.JS: No such function "' + keyObject[2] + '" for key "' + keyObject[0] + '", did you forget your implementation?'); }
 	}, false);
 };
 
@@ -32,17 +35,17 @@ var pubNav = {};
 
 pubNav.go = function () { _navkeys(); }
 
-pubNav.alertMe = function (k) {
+pubNav.alertMe = function (k, arr) {
 	alert('Key #' + k.keyCode + ' was pressed!');
 }
 
-pubNav.consoleLog = function (k) {
-	var keyname = keys[k.keyCode][0];
+pubNav.consoleLog = function (k, arr) {
+	var keyname = arr[0];
 	console.log(keyname);
 }
 
-pubNav.navThere = function (k) {
-	var selector = keys[k.keyCode][1];
+pubNav.navThere = function (k, arr) {
+	var selector = arr[1];
 	var destination = document.querySelector(selector).querySelector('a').getAttribute('href');
 	window.location = destination
 }
