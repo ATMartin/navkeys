@@ -1,7 +1,7 @@
 Navkeys.JS
 ==========
 
-Navkeys is a fledgling project meant to make it easy to bring
+Navkeys is a fledgling project meant to make it easier to bring
 keyboard navigation control to existing websites. 
 
 The current code is functional but extremely limited. 
