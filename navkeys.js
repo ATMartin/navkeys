@@ -31,24 +31,26 @@ var _navkeys = function() {
 	}, false);
 };
 
-var pubNav = {};
+var pubNav = {
 
-pubNav.go = function () { _navkeys(); }
+	go: function () { _navkeys(); },
 
-pubNav.alertMe = function (k, arr) {
-	alert('Key #' + k.keyCode + ' was pressed!');
-}
+	alertMe: function (k, arr) {
+		alert('Key #' + k.keyCode + ' was pressed!');
+	},
 
-pubNav.consoleLog = function (k, arr) {
-	var keyname = arr[0];
-	console.log(keyname);
-}
+	consoleLog: function (k, arr) {
+		var keyname = arr[0];
+		console.log(keyname);
+	},
 
-pubNav.navThere = function (k, arr) {
-	var selector = arr[1];
-	var destination = document.querySelector(selector).querySelector('a').getAttribute('href');
-	window.location = destination
-}
+	navThere: function (k, arr) {
+		var selector = arr[1];
+		var destination = document.querySelector(selector).querySelector('a').getAttribute('href');
+		window.location = destination
+	}
+
+};
 
 return pubNav;
 
